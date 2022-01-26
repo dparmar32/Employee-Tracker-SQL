@@ -6,6 +6,7 @@
 * [Acceptance Criteria](acceptance-criteria)
 * [Getting Started](getting-started)
 * [Databases](databases)
+* [References](references)
 
 
 # Project Title
@@ -173,3 +174,6 @@ You are required to submit BOTH of the following for review:
 * A walkthrough video demonstrating the functionality of the application.
 
 * The URL of the GitHub repository, with a unique name and a README describing the project.
+
+## References
+* [Decimal](https://dev.mysql.com/doc/refman/8.0/en/precision-math-decimal-characteristics.html)
