@@ -33,7 +33,7 @@ db.connect((err) => {
 
 function viewDepartment() {
     let sqlQuery = 'SELECT * FROM department';
-    connection.query(sqlQuery,(err, res) => {
+    db.query(sqlQuery,(err, res) => {
         if (err) throw (err);
         console.log('DEPARTMENTS:');
         console.table(res);
@@ -42,11 +42,23 @@ function viewDepartment() {
 }
 
 function viewRole() {
-
+    let sqlQuery = 'SELECT * FROM role ';
+    db.query(sqlQuery,(err, res) => {
+        if (err) throw (err);
+        console.log('ROLES:');
+        console.table(res);
+        empTrack()
+    })
 }
 
 function viewEmployee() {
-
+    let sqlQuery = 'SELECT * FROM employee ';
+    db.query(sqlQuery,(err, res) => {
+        if (err) throw (err);
+        console.log('EMPLOYEE:');
+        console.table(res);
+        empTrack()
+    })
 }
 
 const empTrack = () => {
