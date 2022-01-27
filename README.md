@@ -174,7 +174,11 @@ You are required to submit BOTH of the following for review:
 * A walkthrough video demonstrating the functionality of the application.
 
 * The URL of the GitHub repository, with a unique name and a README describing the project.
-
+## Packages installed
+* [Inquirer](https://www.npmjs.com/package/inquirer)
+* [MySQL 2](https://www.npmjs.com/package/mysql2)
+* [console table](https://www.npmjs.com/package/console.table)
+* [express](https://www.npmjs.com/package/express)
 ## References
 * [Decimal](https://dev.mysql.com/doc/refman/8.0/en/precision-math-decimal-characteristics.html)
 * [MySQL](https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
