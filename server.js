@@ -100,6 +100,27 @@ function viewAllDepartments() {
     });
 };
 
+function viewRoles () {
+    const sqlQuery = "SELECT * FROM role";
+    connection.query(sqlQuery,
+        (err, res) => {
+            if (err) throw err;
+            console.log(`Show all Roles:`);
+            console.table(res);
+            empTrack();
+        });
+};
+
+function viewEmployees () {
+    const sqlQuery = "SELECT * FROM employee";
+    connection.query(sqlQuery,
+        (err, res) => {
+            if (err) throw err;
+            console.log(`Show all employees:`);
+            console.table(res);
+            empTrack();
+        });
+};
 
 function addDepartment (){
     return inquirer
