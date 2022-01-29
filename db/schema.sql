@@ -1,4 +1,11 @@
+/* DROPPING DATABASES */
 DROP DATABASE IF EXISTS  employeeTrackerDB;
+
+/* DROPPING TABLES */
+DROP TABLE IF EXISTS  employeeTrackerDB;
+DROP TABLE IF EXISTS  employeeTrackerDB;
+DROP TABLE IF EXISTS  employeeTrackerDB;
+
 
 CREATE DATABASE employeeTrackerDB;
 

@@ -183,3 +183,4 @@ You are required to submit BOTH of the following for review:
 * [Decimal](https://dev.mysql.com/doc/refman/8.0/en/precision-math-decimal-characteristics.html)
 * [MySQL](https://dev.mysql.com/doc/mysql-getting-started/en/#mysql-getting-started-installing)
 * [Generate Data](https://www.mockaroo.com/)
+* [Establising connection](https://www.npmjs.com/package/mysql)
