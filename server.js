@@ -45,8 +45,8 @@ function empTrack() {
                     "View all department",
                     "View all role",
                     "View all employee",
-                    "Add a new department",
                     "Add a new role",
+                    "Add a new department",
                     "Add a new employee",
                     "Exit"
                 ],
@@ -67,7 +67,7 @@ function empTrack() {
                 case "Add a new department":
                     addDepartment();
                     break;
-                case "Add role":
+                case "Add a new role":
                     addRole();
                     break;
                 case "Add Employee":
@@ -75,12 +75,6 @@ function empTrack() {
                     break;
                 default:
                     exit();
-                // case "Update Employee Role":
-                //     updateEmployeeRole();
-                //     break;
-                // case "No Action taken":
-                //     connection.end() //Terminating connections
-                //     break;
             }
             ;
         });
@@ -139,6 +133,34 @@ function addDepartment (){
             })
         })
 }
+
+function addRole() {
+    inquirer
+      .prompt([
+        {
+          type: 'input',
+          message: 'What is the role name?',
+          name: 'roleName',
+        },
+        {
+          type: 'input',
+          message: 'What salary does the role have?',
+          name: 'roleSalary'
+        },
+        {
+          type: 'input',
+          message: 'What is the department id number for the role?',
+          name: 'deptID'
+        }
+      ])
+      .then(function(answer) {
+        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [answer.roleName, answer.roleSalary, answer.deptID], function(err, res) {
+          if (err) throw err;
+          console.table(res);
+          empTrack();
+        });
+      });
+  }
 
 function exit() {
     connection.end();
