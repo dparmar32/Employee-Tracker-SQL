@@ -70,7 +70,7 @@ function empTrack() {
                 case "Add a new role":
                     addRole();
                     break;
-                case "Add Employee":
+                case "Add a new employee":
                     addEmployee();
                     break;
                 default:
@@ -139,7 +139,7 @@ function addRole() {
       .prompt([
         {
           type: 'input',
-          message: 'What is the role name?',
+          message: 'What is the name of the role?',
           name: 'roleName',
         },
         {
@@ -154,11 +154,44 @@ function addRole() {
         }
       ])
       .then(function(answer) {
-        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [answer.roleName, answer.roleSalary, answer.deptID], function(err, res) {
-          if (err) throw err;
-          console.table(res);
-          empTrack();
-        });
+        connection.query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)',
+            [answer["roleName"], answer["roleSalary"], answer["deptID"]],
+            function (err, res) {
+                if (!err) {console.table(res);empTrack();} else {throw err;}
+            });
+      });
+  }
+
+  function addEmployee() {
+    inquirer
+      .prompt([
+        {
+          type: 'input',
+          message: 'What is the first name of the employee?',
+          name: 'employeeFirstName'
+        },
+        {
+          type: 'input',
+          message: 'What is the last name of the employee?',
+          name: 'employeeLastName'
+        },
+        {
+          type: 'input',
+          message: 'What is the role id number of the employee?',
+          name: 'roleID'
+        },
+        {
+          type: 'input',
+          message: 'What is the manager id number?',
+          name: 'managerID'
+        }
+      ])
+      .then(function(answer) {
+        connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)',
+            [answer["employeeFirstName"], answer["employeeLastName"], answer["roleID"], answer["managerID"]],
+            function (err, res) {
+                if (!err) {console.table(res);empTrack();} else {throw err;}
+            });
       });
   }
 
