@@ -18,7 +18,7 @@ const connection = mysql.createConnection(
   {
     host: "localhost",
     user: "root",
-    password: "", //TODO: please take the password out while commiting
+    password: "", //TODO: please enter your password
     database: "employeeTrackerDB",
   },
   console.log("Connected to the employeeTrackerDB.")
@@ -37,6 +37,9 @@ connection.connect((err) => {
   empTrack();
 });
 
+/**
+ * The empTrack function is used to display the options to the user
+ */
 function empTrack() {
   inquirer
     .prompt([
@@ -86,6 +89,9 @@ function empTrack() {
     });
 }
 
+/**
+ * This function will execute a SQL query to show all the departments in the database
+ */
 function viewAllDepartments() {
   const sqlQuery = "SELECT * from department";
   connection.query(sqlQuery, (err, res) => {
@@ -98,6 +104,9 @@ function viewAllDepartments() {
   });
 }
 
+/**
+ * This function will query the database for all the roles and display them in a table
+ */
 function viewRoles() {
   const sqlQuery = "SELECT * FROM role";
   connection.query(sqlQuery, (err, res) => {
@@ -110,6 +119,9 @@ function viewRoles() {
   });
 }
 
+/**
+ * This function will execute a SQL query that will select all the employees from the employee table
+ */
 function viewEmployees() {
   const sqlQuery = "SELECT * FROM employee";
   connection.query(sqlQuery, (err, res) => {
@@ -123,6 +135,11 @@ function viewEmployees() {
   });
 }
 
+/**
+ * This function prompts the user for a new department name, and then inserts that department name into
+ * the database
+ * @returns A promise that returns the answer to the question.
+ */
 function addDepartment() {
   return inquirer
     .prompt([
@@ -148,6 +165,11 @@ function addDepartment() {
     });
 }
 
+/**
+ * This function prompts the user for the role name, salary, and department ID number. 
+ * It then uses the connection.query method to insert the role into the role table. 
+ * It then displays the results of the query to the user
+ */
 function addRole() {
   inquirer
     .prompt([
@@ -169,20 +191,27 @@ function addRole() {
     ])
     .then(function (answer) {
       connection.query(
-        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
-        [answer["roleName"], answer["roleSalary"], answer["deptID"]],
-        function (err, res) {
-          if (err) {throw err;}
-          console.log("------------------");
-          console.log("     Add Role     ");
-          console.log("------------------");
-          console.table(res);
-          empTrack();
-        }
+          "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+          [answer.roleName, answer.roleSalary, answer.deptID],
+          function (err, res) {
+              if (err) {
+                  throw err;
+              }
+              console.log("------------------");
+              console.log("     Add Role     ");
+              console.log("------------------");
+              console.table(res);
+              empTrack();
+          }
       );
     });
 }
 
+/**
+ * The addEmployee function prompts the user for the first name, last name, role id, and manager id of
+ * the employee. 
+ * It then inserts the employee into the employee table
+ */
 function addEmployee() {
   inquirer
     .prompt([
@@ -211,11 +240,12 @@ function addEmployee() {
       connection.query(
         "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
         [
-          answer["employeeFirstName"],
-          answer["employeeLastName"],
-          answer["roleID"],
-          answer["managerID"],
+          answer.employeeFirstName,
+          answer.employeeLastName,
+          answer.roleID,
+          answer.managerID,
         ],
+
         function (err, res) {
           if (err) {throw err;}
           console.log("----------------------");
@@ -228,6 +258,9 @@ function addEmployee() {
     });
 }
 
+/**
+ * This function prompts the user for an employee name and role id to update
+ */
 function updateEmployeeRole() {
   inquirer
     .prompt([
@@ -246,8 +279,8 @@ function updateEmployeeRole() {
     .then(function (answer) {
       connection.query(
         "UPDATE employee SET role_id=? WHERE first_name= ?",
-        [answer["updateRole"],
-        answer["employeeRoleUpdate"]],
+        answer.updateRole,
+        answer.employeeRoleUpdate,
         function (err, res) {
           if (err) throw err;
           console.log("------------------------------");
@@ -260,6 +293,9 @@ function updateEmployeeRole() {
     });
 }
 
+/**
+ * This function is used to end the connection to the database and exit the program.
+ */
 function exit() {
   console.log("-----------------------------------------------");
   console.log("Thank you for using the Employee Tracker system");
